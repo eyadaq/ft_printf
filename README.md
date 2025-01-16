@@ -52,8 +52,6 @@ The project supports the following conversion specifiers:
    - `ft_putstr_fd`: Outputs a string.
    - `ft_putnbr_fd`: Outputs an integer.
    - `ft_itoa`: Converts an integer to a string.
-   - `ft_utoa`: Converts an unsigned integer to a string.
-   - `ft_itoa_base`: Converts an integer to a string in a specified base.
    - `ft_strlen`: Computes the length of a string.
 
 2. **Pointer Formatting**:

@@ -102,7 +102,6 @@ ft_printf("Percent: %%\n");
 * Handling variadic arguments with `va_list`.
 * Converting numbers to strings in decimal and hexadecimal.
 * Applying width, precision, and flags during output.
-* Buffer management to optimize output.
 
 ---
 

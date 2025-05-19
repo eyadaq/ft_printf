@@ -1,72 +1,118 @@
-# ft_printf: A Custom Implementation of printf
+# 🖨️ ft_printf
 
-**ft_printf** is a project from the 42 curriculum that challenges students to recreate the behavior of the standard `printf` function from the C standard library. This project focuses on understanding variadic functions, formatted output, and memory management.
+## 📌 Table of Contents
+- [Introduction](#introduction)
+- [Project Objectives](#project-objectives)
+- [Supported Conversions](#supported-conversions)
+- [Flags, Width, Precision](#flags-width-precision)
+- [Compilation](#compilation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Implementation Overview](#implementation-overview)
+- [Resources](#resources)
 
-## Overview
+---
 
-The goal of **ft_printf** is to implement a function that handles a subset of the functionality provided by the standard `printf`. It processes a format string and a variable number of arguments to produce formatted output.
+## 🧩 Introduction
 
-### Supported Conversions
+**ft_printf** is a project that recreates the standard C library function `printf`.  
+You will implement a function that handles formatted output with support for a subset of conversion specifiers and flags.
 
-The project supports the following conversion specifiers:
+---
 
-- `%c` : Prints a single character.
-- `%s` : Prints a null-terminated string.
-- `%p` : Prints a pointer address in hexadecimal format (with `0x` prefix).
-- `%d` : Prints a signed decimal integer.
-- `%i` : Prints a signed decimal integer (same as `%d`).
-- `%u` : Prints an unsigned decimal integer.
-- `%x` : Prints an unsigned hexadecimal integer (lowercase).
-- `%X` : Prints an unsigned hexadecimal integer (uppercase).
-- `%%` : Prints a literal `%` character.
+## 🎯 Project Objectives
 
-### Features
+- Understand variadic functions (`stdarg.h`).
+- Parse format strings.
+- Handle different data types and flags.
+- Manage output formatting, padding, and precision.
+- Avoid using the standard `printf` family.
 
-1. **Parsing the Format String**:
-   - The format string is processed character by character.
-   - Special sequences starting with `%` are identified as conversion specifiers.
-   - Arguments are matched with their respective specifiers and formatted accordingly.
+---
 
-2. **Variadic Functions**:
-   - Implements variadic function handling using `stdarg.h` macros:
-     - `va_start`: Initializes the variadic argument list.
-     - `va_arg`: Retrieves the next argument.
-     - `va_end`: Cleans up the variadic argument list.
+## 🔤 Supported Conversions
 
-3. **Memory Management**:
-   - Handles dynamic memory allocation for strings and pointers.
-   - Ensures proper cleanup to avoid memory leaks.
+- `%c` — character
+- `%s` — string
+- `%p` — pointer (hexadecimal)
+- `%d` / `%i` — signed decimal integer
+- `%u` — unsigned decimal integer
+- `%x` / `%X` — unsigned hexadecimal (lowercase / uppercase)
+- `%%` — literal percent sign
 
-4. **Base Conversion**:
-   - Converts integers to strings in various bases (decimal, hexadecimal).
-   - Handles both uppercase and lowercase hexadecimal formats.
+---
 
-5. **Output Handling**:
-   - Uses `write` to send output to the standard output (file descriptor `1`).
-   - Ensures correct character count for the return value.
+## 🚩 Flags, Width, Precision
 
-## Implementation Highlights
+You must support:
 
-1. **Helper Functions**:
-   - `ft_putchar_fd`: Outputs a single character.
-   - `ft_putstr_fd`: Outputs a string.
-   - `ft_putnbr_fd`: Outputs an integer.
-   - `ft_itoa`: Converts an integer to a string.
-   - `ft_strlen`: Computes the length of a string.
+- Flags: `-` (left-justify), `0` (zero-padding)
+- Width: minimum field width (number or `*`)
+- Precision: `.number` or `.*`
+- Handle edge cases such as NULL strings and zero values with precision 0.
 
-2. **Pointer Formatting**:
-   - Adds the `0x` prefix for hexadecimal pointers.
-   - Converts the address value to lowercase hexadecimal format.
+---
 
-3. **Edge Case Handling**:
-   - Correctly handles `NULL` strings by printing `(null)`.
-   - Manages edge cases for integers (e.g., `INT_MIN` or `0`).
+## 🛠 Compilation
 
-4. **Return Value**:
-   - Returns the total number of characters printed, including all formatted content.
+```bash
+make
+````
 
-### Example Usage
+Targets:
+
+```bash
+make clean    # Remove object files
+make fclean   # Remove objects and executable
+make re       # Rebuild everything
+```
+
+---
+
+## 🚀 Usage
+
+Use your function as a replacement for `printf`:
 
 ```c
-ft_printf("Hello, %s! Your score is %d.\n", "World", 42);
-// Output: Hello, World! Your score is 42.
+int ret = ft_printf("Hello %s! Number: %d\n", "World", 42);
+```
+
+Returns the number of characters printed.
+
+---
+
+## 💡 Examples
+
+```c
+ft_printf("Char: %c\n", 'A');
+ft_printf("String: %10s\n", "Hello");
+ft_printf("Pointer: %p\n", ptr);
+ft_printf("Decimal: %d\n", -123);
+ft_printf("Unsigned: %u\n", 123);
+ft_printf("Hex lower: %x\n", 255);
+ft_printf("Hex upper: %X\n", 255);
+ft_printf("Percent: %%\n");
+```
+
+---
+
+## 🧱 Implementation Overview
+
+* Parsing format strings with a state machine.
+* Handling variadic arguments with `va_list`.
+* Converting numbers to strings in decimal and hexadecimal.
+* Applying width, precision, and flags during output.
+* Buffer management to optimize output.
+
+---
+
+## 📚 Resources
+
+* `man 3 printf`
+* `man 3 va_start`
+* 42 ft\_printf subject and examples
+* Online tutorials on variadic functions and format parsing
+
+---
+
+> 🖨️ Project developed at 42 to deepen understanding of C variadic functions and string formatting.
